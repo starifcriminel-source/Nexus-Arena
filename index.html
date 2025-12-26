@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>NEXUS ARENA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="glass">🏆 LEGEND: <span id="legend">Aucun</span></div>
+  <h1>NEXUS ARENA</h1>
+
+  <div class="glass" id="init">
+    <h3>INITIALISATION</h3>
+    <button id="btnSolo">IA CHALLENGE</button>
+    <form id="formMulti">
+      <input type="password" name="c" placeholder="CODE [4]" required />
+      <button type="submit">CRÉER MULTI</button>
+    </form>
+  </div>
+
+  <div class="glass" id="jeu" style="display:none">
+    <div id="remain" class="timer">—</div>
+    <form id="formDeviner">
+      <input type="text" name="n" placeholder="AGENT" required />
+      <input type="number" name="t" placeholder="CODE [4]" required />
+      <button type="submit">DÉCRYPTER</button>
+    </form>
+  </div>
+
+  <div class="glass" id="verrou" style="display:none">
+    <h2 id="statusTxt">SYSTÈME VERROUILLÉ</h2>
+    <p>Code : <b id="codeTxt">----</b></p>
+    <button id="btnReset">REBOOT</button>
+  </div>
+
+  <div class="glass">
+    <h4>FLUX</h4>
+    <div id="flux" class="flux"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
