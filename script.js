@@ -70,7 +70,6 @@ function startMulti(code) {
 
 function deviner(nom, tent) {
   if(!jeuEnCours) return;
-  finPartieMillis = Date.now() + DUREE_MANCHE;
   let bp=0, mp=0;
   let sU=[0,0,0,0], tU=[0,0,0,0];
   for(let i=0;i<4;i++) {
@@ -84,8 +83,11 @@ function deviner(nom, tent) {
     }
   }
   let style = (bp===4) ? "item green" : "item blue";
-  let res = `<div class='${style}'><b>${nom}</b> : ${tent} <span class='bp'>${bp} BP</span> | <span class='mp'>${mp} MP</span></div>`;
+  let res = `<div class='${style}'><b>${nom}</b> : ${tent} 
+             <span class='bp'>${bp} BP</span> | 
+             <span class='mp'>${mp} MP</span></div>`;
   historiqueHTML = res + historiqueHTML;
+
   if(bp===4) {
     jeuEnCours=false; gagnant=nom;
     let scoreFinal=Math.floor((finPartieMillis-Date.now())/1000);
@@ -94,14 +96,13 @@ function deviner(nom, tent) {
       localStorage.setItem("recordScore", recordScore);
       localStorage.setItem("recordNom", recordNom);
     }
+    historiqueHTML = `<div class='item green'>🎉 ${nom} a trouvé le code ! Score: ${scoreFinal}s</div>` + historiqueHTML;
   }
   majUI();
 }
+
 function resetGame() {
-  codeSecret = "";
-  jeuEnCours = false;
-  gagnant = "";
-  historiqueHTML = "";
+  codeSecret=""; jeuEnCours=false; gagnant=""; historiqueHTML="";
   majUI();
 }
 
@@ -127,3 +128,12 @@ setInterval(majUI, 1000);
 
 // 🚀 Initialisation
 majUI();
+
+// 🤖 Mode démo IA : si personne ne joue, l’IA tente un code toutes les 2s
+setInterval(()=>{
+  if(jeuEnCours && historiqueHTML==="" && codeSecret!=="") {
+    let tentative="";
+    for(let i=0;i<4;i++) tentative+=Math.floor(Math.random()*10);
+    deviner("IA", tentative);
+  }
+},2000);
