@@ -1,11 +1,12 @@
 body {
-  background:#0a0a1a;
+  background: radial-gradient(circle at top, #0a0a1a, #000);
   color:#eee;
-  font-family:sans-serif;
+  font-family:'Roboto', sans-serif;
   text-align:center;
   margin:0;
 }
 h1 {
+  font-family:'Orbitron', sans-serif;
   color:#00f2ff;
   text-shadow:0 0 15px #00f2ff;
   animation: glow 2s infinite alternate;
@@ -50,6 +51,7 @@ input {
   font-size:2rem;
   color:#00f2ff;
   text-shadow:0 0 10px #00f2ff;
+  animation: pulse 1s infinite alternate;
 }
 .flux {
   max-height:200px;
@@ -62,4 +64,8 @@ input {
 @keyframes fadeIn {
   from {opacity:0; transform:translateY(10px);}
   to   {opacity:1; transform:translateY(0);}
+}
+@keyframes pulse {
+  from {opacity:0.6;}
+  to   {opacity:1;}
 }
