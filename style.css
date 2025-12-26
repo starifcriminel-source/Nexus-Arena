@@ -1,0 +1,65 @@
+body {
+  background:#0a0a1a;
+  color:#eee;
+  font-family:sans-serif;
+  text-align:center;
+  margin:0;
+}
+h1 {
+  color:#00f2ff;
+  text-shadow:0 0 15px #00f2ff;
+  animation: glow 2s infinite alternate;
+}
+.glass {
+  background:rgba(255,255,255,0.05);
+  border-radius:15px;
+  padding:15px;
+  margin:10px;
+  box-shadow:0 0 15px rgba(0,242,255,0.2);
+}
+.item {
+  padding:8px;
+  margin:5px;
+  border-radius:8px;
+  text-align:left;
+  animation: fadeIn 0.5s ease;
+}
+.item.blue {border-left:4px solid #00f2ff;background:rgba(0,242,255,0.1)}
+.item.green{border-left:4px solid #00ff88;background:rgba(0,255,136,0.1)}
+.item.red  {border-left:4px solid #ff4757;background:rgba(255,71,87,0.1)}
+button {
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(45deg,#00f2ff,#0066ff);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:transform 0.2s;
+}
+button:hover {transform:scale(1.05)}
+input {
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #334;
+  margin:5px;
+  background:#0f0f1f;
+  color:#eee;
+}
+.timer {
+  font-size:2rem;
+  color:#00f2ff;
+  text-shadow:0 0 10px #00f2ff;
+}
+.flux {
+  max-height:200px;
+  overflow-y:auto;
+}
+@keyframes glow {
+  from {text-shadow:0 0 5px #00f2ff;}
+  to   {text-shadow:0 0 20px #00f2ff;}
+}
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(10px);}
+  to   {opacity:1; transform:translateY(0);}
+}
