@@ -1,45 +1,111 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>NEXUS ARENA</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Nexus Arena</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <div class="glass">🏆 LEGEND: <span id="legend">Aucun</span></div>
-  <h1>NEXUS ARENA</h1>
+  <header class="topbar">
+    <h1 class="brand">NEXUS ARENA</h1>
+    <div class="theme-switcher">
+      <button class="pill" data-theme="ocean">Océan</button>
+      <button class="pill" data-theme="amethyst">Améthyste</button>
+      <button class="pill" data-theme="magma">Magma</button>
+    </div>
+  </header>
 
-  <div class="glass" id="init">
-    <h3>INITIALISATION</h3>
-    <button id="btnSolo">IA CHALLENGE</button>
-    <form id="formMulti">
-      <input type="password" name="c" placeholder="CODE [4]" required />
-      <button type="submit">CRÉER MULTI</button>
-    </form>
-  </div>
+  <main class="container">
+    <section class="panel glass stats">
+      <div class="stat"><span class="label">Legend</span><span id="legend">Aucun (0s)</span></div>
+      <div class="stat"><span class="label">Mode</span><span id="modeLabel">—</span></div>
+      <div class="stat"><span class="label">Difficulté</span><span id="diffLabel">—</span></div>
+      <div class="stat"><span class="label">Temps</span><span id="timer">—</span></div>
+      <div class="progress"><div id="progressBar"></div></div>
+    </section>
 
-  <div class="glass" id="jeu" style="display:none">
-    <div id="remain" class="timer">—</div>
-    <form id="formDeviner">
-      <input type="text" name="n" placeholder="AGENT" required />
-      <input type="number" name="t" placeholder="CODE [4]" required />
-      <button type="submit">DÉCRYPTER</button>
-    </form>
-  </div>
+    <section class="panel glass controls">
+      <div class="tabs">
+        <button class="tab active" data-tab="play">Jouer</button>
+        <button class="tab" data-tab="options">Options</button>
+        <button class="tab" data-tab="achievements">Succès</button>
+      </div>
 
-  <div class="glass" id="verrou" style="display:none">
-    <h2 id="statusTxt">SYSTÈME VERROUILLÉ</h2>
-    <p>Code : <b id="codeTxt">----</b></p>
-    <button id="btnReset">REBOOT</button>
-  </div>
+      <div class="tab-content" id="tab-play">
+        <div class="row">
+          <button id="btnSolo" class="primary">Solo</button>
+          <button id="btnDaily" class="secondary">Défi du jour</button>
+        </div>
+        <form id="formMulti" class="row">
+          <input type="text" name="host" placeholder="Maître du code (nom)" required/>
+          <input type="text" name="code" placeholder="Code secret [4-8]" maxlength="8" required/>
+          <button type="submit" class="accent">Créer partie (multi local)</button>
+        </form>
 
-  <div class="glass">
-    <h4>FLUX</h4>
-    <div id="flux" class="flux"></div>
-  </div>
+        <div id="playArea" class="play-area hidden">
+          <div class="countdown glow" id="remain">60s</div>
+          <form id="formGuess" class="row">
+            <input type="text" name="player" placeholder="Agent" required/>
+            <input type="text" name="guess" placeholder="Tentative [4-8]" maxlength="8" required inputmode="numeric"/>
+            <button type="submit" class="primary">Décrypter</button>
+          </form>
+          <div class="row">
+            <button id="btnHint" class="ghost">Indice (–5s)</button>
+            <button id="btnReset" class="danger">Reboot</button>
+          </div>
+          <div class="status">
+            <h3 id="statusTitle">SYSTÈME VERROUILLÉ</h3>
+            <p>Code: <b id="revealed">----</b></p>
+          </div>
+        </div>
+      </div>
 
+      <div class="tab-content hidden" id="tab-options">
+        <div class="row">
+          <label class="chip">
+            Difficulté:
+            <select id="difficulty">
+              <option value="4">Facile (4)</option>
+              <option value="6">Difficile (6)</option>
+              <option value="8">Légendaire (8)</option>
+            </select>
+          </label>
+          <label class="chip">
+            Durée:
+            <select id="duration">
+              <option value="60">60s</option>
+              <option value="90">90s</option>
+              <option value="120">120s</option>
+            </select>
+          </label>
+          <label class="chip">
+            Indices:
+            <select id="hints">
+              <option value="0">désactivés</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </label>
+        </div>
+        <div class="row">
+          <button id="btnSaveOpts" class="accent">Sauvegarder</button>
+          <button id="btnClearData" class="danger">Réinitialiser records</button>
+        </div>
+      </div>
+
+      <div class="tab-content hidden" id="tab-achievements">
+        <ul id="achList" class="ach-list"></ul>
+      </div>
+    </section>
+
+    <section class="panel glass feed">
+      <h4>Flux</h4>
+      <div id="feed" class="feed-body"></div>
+    </section>
+  </main>
+
+  <canvas id="fxCanvas" class="fx-canvas"></canvas>
   <script src="script.js"></script>
 </body>
 </html>
