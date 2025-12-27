@@ -1,45 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Décryptage Festif - Jeu de Code</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NEXUS ARENA — Mastermind</title>
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="NEXUS ARENA — Mastermind en ligne, salons Duo & Groupe, liens partageables, hébergé sur GitHub Pages." />
 </head>
 <body>
-  <div class="container glass">
-    <h1 class="neon-title">🎉 Décryptage Festif 🎉</h1>
-    <div class="mode-select">
-      <button id="soloBtn" class="neon-btn active">Solo</button>
-      <button id="multiBtn" class="neon-btn">Multi</button>
-    </div>
-    <div id="multiCodeInput" class="hidden">
-      <label for="secretInput">Code secret (4 chiffres) :</label>
-      <input type="text" id="secretInput" maxlength="4" pattern="\d{4}" autocomplete="off">
-      <button id="setSecretBtn" class="neon-btn">Valider</button>
-    </div>
-    <div id="gameArea">
-      <div id="timer" class="timer neon-glow">60</div>
-      <form id="guessForm" autocomplete="off">
-        <input type="text" id="guessInput" maxlength="4" pattern="\d{4}" autocomplete="off" placeholder="Devinez le code...">
-        <button type="submit" class="neon-btn">Valider</button>
-      </form>
-      <div id="feedback"></div>
-      <div id="history"></div>
-      <div id="result"></div>
-      <div id="winner"></div>
-      <div id="confetti-canvas"></div>
-    </div>
-    <div id="recordArea">
-      <h2 class="neon-subtitle">🏆 Records</h2>
-      <form id="recordForm" class="hidden">
-        <input type="text" id="playerName" maxlength="12" placeholder="Votre nom">
-        <button type="submit" class="neon-btn">Enregistrer</button>
-      </form>
-      <ul id="recordList"></ul>
-    </div>
-    <button id="restartBtn" class="neon-btn">🔄 Recommencer</button>
-  </div>
-  <script src="script.js"></script>
+  <main class="container">
+    <header class="hero">
+      <h1>NEXUS ARENA</h1>
+      <p class="subtitle">Jeu Mastermind 4 chiffres — crée un salon, partage le lien et joue</p>
+      <div class="record" id="record">🏆 Record: —</div>
+    </header>
+
+    <section class="panel" id="createPanel">
+      <h2>Créer un salon</h2>
+      <div class="row">
+        <label>Type de salon</label>
+        <select id="modeSelect">
+          <option value="duo">Duo (tu définis le code)</option>
+          <option value="group">Groupe (le site génère le code)</option>
+          <option value="solo">Solo (jouer seul)</option>
+        </select>
+      </div>
+
+      <div class="row" id="codeRow">
+        <label>Code (4 chiffres)</label>
+        <input id="codeInput" type="text" inputmode="numeric" maxlength="4" placeholder="Ex: 0427" />
+      </div>
+
+      <div class="row">
+        <label>Nom (pseudo)</label>
+        <input id="nameInput" type="text" maxlength="20" placeholder="Ton pseudo" />
+      </div>
+
+      <div class="row actions">
+        <button id="createBtn" class="btn primary">Créer le salon</button>
+        <button id="createQuickBtn" class="btn">Créer rapide (généré)</button>
+      </div>
+
+      <div class="row small" id="linksRow" style="display:none">
+        <label>Liens à partager</label>
+        <textarea id="linksArea" readonly rows="3"></textarea>
+        <div class="row actions">
+          <button id="copyLinks" class="btn">Copier les liens</button>
+          <button id="openPlayer" class="btn">Ouvrir lien joueur</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="playPanel" style="display:none">
+      <h2 id="roomTitle">Salon</h2>
+      <div class="row">
+        <div id="statusBox" class="glass">Statut: <span id="statusText">—</span></div>
+      </div>
+
+      <div id="timerRow" class="row" style="display:none">
+        <label>Temps restant</label>
+        <div id="timer" class="big">00s</div>
+      </div>
+
+      <div id="guessRow" class="row">
+        <label>Entrer une proposition (4 chiffres)</label>
+        <input id="guessInput" type="text" inputmode="numeric" maxlength="4" placeholder="Ex: 1234" />
+        <button id="guessBtn" class="btn primary">Proposer</button>
+      </div>
+
+      <div class="row">
+        <label>Historique</label>
+        <div id="history" class="history"></div>
+      </div>
+
+      <div class="row actions">
+        <button id="leaveBtn" class="btn">Quitter le salon</button>
+        <button id="resetBtn" class="btn">Réinitialiser (créateur)</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <small>Hébergé sur GitHub Pages • Jeu autonome — aucune donnée serveur</small>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
 </body>
 </html>
